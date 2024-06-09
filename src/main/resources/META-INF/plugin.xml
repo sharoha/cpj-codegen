@@ -9,9 +9,11 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <actions>
-        <action class="com.github.sharoha.cpjcodegen.actions.ParseLeetcodeContest"
-                description="LeetcodeParser"
-                text="Leetcode Parser"
-                id="leetcode"/>
+        <action id="com.github.sharoha.cpjcodegen.actions.LeetcodeContestProblemAction"
+                class="com.github.sharoha.cpjcodegen.actions.LeetcodeContestProblemAction"
+                text="Leetcode Contest Parser" description="A task to parse leetcode current and previous contests"/>
+        <action id="com.github.sharoha.cpjcodegen.actions.LeetcodeProblemAction"
+                class="com.github.sharoha.cpjcodegen.actions.LeetcodeProblemAction" text="Leetcode Problem Parser"
+                description="An action to parse leetcode problem"/>
     </actions>
 </idea-plugin>
