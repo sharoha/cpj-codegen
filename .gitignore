@@ -3,3 +3,7 @@
 .qodana/
 build/
 .github/
+.run/
+bin/
+.kotlin/
+.settings/
