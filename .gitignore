@@ -1,4 +1,9 @@
-.gradle
-.idea
-.qodana
-build
+.gradle/
+.idea/
+.qodana/
+build/
+.github/
+.run/
+bin/
+.kotlin/
+.settings/

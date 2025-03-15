@@ -1,18 +1,16 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.sharoha.cpjcodegen</id>
-    <name>cpj-codegen</name>
+    <name>Problem Parser</name>
     <vendor>sharoha</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.sharoha.cpjcodegen.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.sharoha.cpjcodegen.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="com.github.sharoha.cpjcodegen.actions.contest.ContestParserAction"
+                class="com.github.sharoha.cpjcodegen.actions.contest.ContestParserAction"
+                text="Contest Parser" description="A task to parse contests for the selected Platform"/>
+    </actions>
 </idea-plugin>
