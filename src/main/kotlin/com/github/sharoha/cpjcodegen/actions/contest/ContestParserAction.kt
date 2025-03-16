@@ -7,12 +7,14 @@ import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.util.ui.JBUI
+import net.miginfocom.layout.Grid
 import java.awt.BorderLayout
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JDialog
 import javax.swing.JPanel
 import javax.swing.JScrollPane
+import javax.swing.ListSelectionModel
 
 class ContestParserAction: ParseAction<JDialog>() {
     // TODO('Whenever a Platform is selected, we should render the corresponding contest list of it, this is done via the interface ContestParser')
@@ -26,8 +28,8 @@ class ContestParserAction: ParseAction<JDialog>() {
 
         contentPane.add(getUpperPanel(), BorderLayout.NORTH)
         contentPane.add(getCenterPanel(), BorderLayout.CENTER)
+        contentPane.add(getLowerPanel(), BorderLayout.SOUTH)
         return jDialog
-
     }
 
     // TODO ("Add logic to get the selected Item")
@@ -49,6 +51,7 @@ class ContestParserAction: ParseAction<JDialog>() {
 
         // TODO contest list needs to be updated with dynamic value
         val contestList = JBList("Contest 1", "Contest 2")
+        contestList.selectionMode = ListSelectionModel.SINGLE_SELECTION
         val contestScroll = JBScrollPane(contestList)
         centerPanel.add(contestScroll)
 
@@ -57,6 +60,28 @@ class ContestParserAction: ParseAction<JDialog>() {
         val taskScroll = JBScrollPane(taskList)
         centerPanel.add(taskScroll)
         return centerPanel
+    }
+
+    private fun getLowerPanel(): JPanel {
+        val bottomPanel = JPanel()
+        bottomPanel.border = JBUI.Borders.empty(10)
+        bottomPanel.layout = BorderLayout(5, 5)
+
+        bottomPanel.add(getOkCancelPanel(), BorderLayout.EAST)
+
+        return bottomPanel
+    }
+
+    private fun getOkCancelPanel(): JPanel {
+        val okCancelPanel = JPanel()
+        okCancelPanel.layout = GridLayout(1, 2)
+
+        val okButton = JButton("OK")
+        okCancelPanel.add(okButton)
+
+        val cancelButton = JButton("Cancel")
+        okCancelPanel.add(cancelButton)
+        return okCancelPanel
     }
     private fun getPlatformList(): Array<Platforms> {
         return Platforms.entries.toTypedArray()
