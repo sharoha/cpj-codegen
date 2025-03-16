@@ -1,6 +1,7 @@
 package com.github.sharoha.cpjcodegen.actions.contest
 
 import com.github.sharoha.cpjcodegen.actions.ParseAction
+import com.github.sharoha.cpjcodegen.actions.contest.actions.OnCancelAction
 import com.github.sharoha.cpjcodegen.model.Platforms
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComboBox
@@ -10,6 +11,9 @@ import com.intellij.util.ui.JBUI
 import net.miginfocom.layout.Grid
 import java.awt.BorderLayout
 import java.awt.GridLayout
+import java.awt.event.ActionEvent
+import javax.swing.AbstractAction
+import javax.swing.Action
 import javax.swing.JButton
 import javax.swing.JDialog
 import javax.swing.JPanel
@@ -28,7 +32,7 @@ class ContestParserAction: ParseAction<JDialog>() {
 
         contentPane.add(getUpperPanel(), BorderLayout.NORTH)
         contentPane.add(getCenterPanel(), BorderLayout.CENTER)
-        contentPane.add(getLowerPanel(), BorderLayout.SOUTH)
+        contentPane.add(getLowerPanel(jDialog), BorderLayout.SOUTH)
         return jDialog
     }
 
@@ -62,24 +66,26 @@ class ContestParserAction: ParseAction<JDialog>() {
         return centerPanel
     }
 
-    private fun getLowerPanel(): JPanel {
+    private fun getLowerPanel(dialog: JDialog): JPanel {
         val bottomPanel = JPanel()
         bottomPanel.border = JBUI.Borders.empty(10)
         bottomPanel.layout = BorderLayout(5, 5)
 
-        bottomPanel.add(getOkCancelPanel(), BorderLayout.EAST)
+        bottomPanel.add(getOkCancelPanel(dialog), BorderLayout.EAST)
 
         return bottomPanel
     }
 
-    private fun getOkCancelPanel(): JPanel {
+    private fun getOkCancelPanel(dialog: JDialog): JPanel {
         val okCancelPanel = JPanel()
         okCancelPanel.layout = GridLayout(1, 2)
 
         val okButton = JButton("OK")
         okCancelPanel.add(okButton)
 
+        // todo this cancel button is not gettign displayed even though the oncancelaction works now
         val cancelButton = JButton("Cancel")
+        cancelButton.action = OnCancelAction(dialog)
         okCancelPanel.add(cancelButton)
         return okCancelPanel
     }
